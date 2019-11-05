@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Posts</h1>
+
+<%= link_to 'New Post', new_post_path %>
+
+
+<div class="posts">
+
+  <% @posts.each do |post| %>
+    <div class="post">
+      <div class="post-header">
+        <span class="user-time-post">
+          <%= link_to "#{post.user}", post, class: "username" %>
+          <%= link_to distance_of_time_in_words(Time.now, post.created_at)+ ' ago', post, class: 'timestamp' %>
+        </span>
+      
+        <span class="edit-delete-post">
+          <%= link_to 'Edit Post', edit_post_path(post) %>
+          <%= link_to 'Delete', post, method: :delete, data: {confirm: "Are you sure?"} %>
+        </span>
+      </div>
+  
+  
+      <div class="post-content">
+        <p><%= post.message %><br/></p>
+      </div>
+
+      <br/>
+
+
+      <h4 class="comment-head">Comments</h4>
+
+      <% if post.comments.count > 0 %>
+      <div class="all-comments">
+        <% post.comments.each do |comment| %>
+          <p class="comment">
+            <span class="comment-content">
+              <strong><%= link_to "#{comment.user}", class: "username" %></strong> <%= comment.comment %>
+            </span>
+            <span class="edit-delete-comment">
+              <%= link_to 'Edit', edit_comment_path(comment) %>
+              <%= link_to 'Delete', comment, method: :delete, data: {confirm: "Are you sure?"} %>
+            </span>
+          </p>
+        <% end %>
+      </div>
+      <% end %>
+
+      <%= form_for(@comment) do |c| %>
+        <%= c.text_area :user, placeholder: "Username...", rows: "1" %>
+        <%= c.text_area :comment, placeholder: "Write a comment...", rows: "1" %>
+        <%= c.submit "Comment" %>
+        <%= c.hidden_field :post_id, value: post.id %>
+      <% end %>
+    </div>
+  <% end %>
+
+
+</div>
