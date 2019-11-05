@@ -3,8 +3,8 @@
 
 <div class="posts-show">
 <div class="post">
-<p class="post-header">
-  <span>
+<div class="post-header">
+  <span class="user-time-post">
     <%= link_to "#{@post.user}", @post, class: "username" %>
     <%= link_to distance_of_time_in_words(Time.now, @post.created_at)+ ' ago', @post, class: 'timestamp' %>
   </span>
@@ -13,12 +13,12 @@
     <%= link_to 'Edit Post', edit_post_path(@post) %>
     <%= link_to 'Delete', @post, method: :delete, data: {confirm: "Are you sure?"} %>
   </span>
-</p>
+</div>
 
 
-  <p class="post-content">
-    <%= @post.message %><br/>
-  </p>
+  <div class="post-content">
+    <p><%= @post.message %><br/></p>
+  </div>
 
   <br/>
 
