@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
+<h1>Welcome <%= current_user.username %></h1>
+<h2>Posts</h2>
 
 <%= link_to 'New Post', new_post_path %>
 
@@ -11,7 +12,7 @@
     <div class="post">
       <div class="post-header">
         <span class="user-time-post">
-          <%= link_to "#{post.user}", post, class: "username" %>
+          <%= link_to "#{post.user.username}", post, class: "username" %>
           <%= link_to distance_of_time_in_words(Time.now, post.created_at)+ ' ago', post, class: 'timestamp' %>
         </span>
       
@@ -36,7 +37,7 @@
         <% post.comments.each do |comment| %>
           <p class="comment">
             <span class="comment-content">
-              <strong><%= link_to "#{comment.user}", class: "username" %></strong> <%= comment.comment %>
+              <strong><%= link_to "#{comment.user.username}", class: "username" %></strong> <%= comment.comment %>
             </span>
             <span class="edit-delete-comment">
               <%= link_to 'Edit', edit_comment_path(comment) %>
@@ -48,9 +49,7 @@
       <% end %>
 
       <%= form_for(@comment) do |c| %>
-        <%= c.text_area :user, placeholder: "Username...", rows: "1" %>
-        <%= c.text_area :comment, placeholder: "Write a comment...", rows: "1" %>
-        <%= c.submit "Comment" %>
+        <%= c.text_field :comment, class: "comment-field", placeholder: "Write a comment...", rows: "1" %>
         <%= c.hidden_field :post_id, value: post.id %>
       <% end %>
     </div>
