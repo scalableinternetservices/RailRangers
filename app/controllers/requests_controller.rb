@@ -15,6 +15,8 @@ class RequestsController < ApplicationController
   # GET /requests/new
   def new
     @request = Request.new
+    @requester = current_user
+    @requestee = User.find_by(id: params[:id])
   end
 
   # GET /requests/1/edit

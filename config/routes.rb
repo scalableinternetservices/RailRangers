@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-   resources :users, only: [:new, :create]
+   resources :users, only: [:show, :new, :create]
    resources :posts#, except: :index
    resources :comments
    resources :requests
    get 'login', to: 'sessions#new'
+   get 'user', to: 'users#show'
+   get 'users', to: 'users#index'
+   post 'requests', to: 'requests#create'
+   get 'new_request', to: 'requests#new'
    post 'login', to: 'sessions#create'
    get 'welcome', to: 'sessions#welcome'
    root 'sessions#welcome'

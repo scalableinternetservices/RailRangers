@@ -1,0 +1,23 @@
+<div class="users-index">
+  <h1>All Users</h1>
+
+  <div class="all-users">
+    <div class="users-grid">
+      <% @users.each do |user| %>
+        <% next if user == current_user %>
+          <div class="users-index-user">
+            <%= link_to user_path(user) do %>
+              <%= user.username %>
+              <% if !@friends.include?(user) %>
+                <%= button_to "Add Friend", new_request_path, :id => "add-friend-btn",
+      :class => "inbox-sf-add-btn tip", :method => :get %>
+              <% if !@friends.include?(user) %>
+                <%= button_to "Message", new_request_path, :id => "add-friend-btn",
+      :class => "inbox-sf-add-btn tip", :method => :get %>
+                <% end %>
+            <% end %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
