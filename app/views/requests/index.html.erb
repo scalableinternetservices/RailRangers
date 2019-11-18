@@ -10,7 +10,7 @@
             </p>
 
             <% if current_user.requesters.where('requests.accepted = ?', false).include?(user) %>
-              <%= link_to "Confirm", request_path(id: current_user.received_requests.find_by(requester_id: user.id).id, request: { requester_id: user.id }), method: :put %>
+              <%= button_to "Confirm", request_path(id: current_user.received_requests.find_by(requester_id: user.id).id, request: { requester_id: user.id }), method: :put %>
             <% end %>
           </div>
       <% end %>

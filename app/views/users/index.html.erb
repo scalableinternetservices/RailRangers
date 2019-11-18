@@ -10,12 +10,11 @@
               <%= user.username %>
 
                 <% if current_user.requesters.where('requests.accepted = ?', false).include?(user) %>
-                  <%= link_to "Confirm", request_path(id: current_user.received_requests.find_by(requester_id: user.id).id, request: { requester_id: user.id }), method: :put %>
-                <% elsif current_user.requesters.include?(user) %>
+                  <%= button_to "Confirm", request_path(id: current_user.received_requests.find_by(requester_id: user.id).id, request: { requester_id: user.id }), method: :put %>
+                <% elsif current_user.requesters.where('requests.accepted = ?', true).include?(user) %>
+                    <%= "Message" %>
                 <% elsif !current_user.requestees.include?(user) %>
-                  <%= link_to "Add Friend", requests_path(request: { requestee_id: user.id }), method: :post, class: "add-friend-button users-index-button" %>
-                <% else %>
-                  <%= "Message" %>
+                  <%= button_to "Add Friend", new_request_path(request: { requestee_id: user.id }), method: :get, class: "add-friend-button users-index-button" %>                  
                 <% end %>
             <% end %>
           </div>
