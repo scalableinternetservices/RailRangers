@@ -8,6 +8,7 @@ Rails.application.routes.draw do
    get 'users', to: 'users#index'
    post 'requests', to: 'requests#create'
    get 'new_request', to: 'requests#new'
+   put 'request', to: 'request#update'
    post 'login', to: 'sessions#create'
    get 'welcome', to: 'sessions#welcome'
    root 'sessions#welcome'
