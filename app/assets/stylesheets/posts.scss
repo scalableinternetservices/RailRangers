@@ -51,6 +51,30 @@
     margin-left: 5px;
 }
 
+.confirm-requests {
+    border:1px solid black;
+    width: 20%;
+    padding: 30px;
+    margin: 5px 5px 5px 5px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    position:relative;
+}
+
+.requester {
+    float: left;
+    position:absolute;
+    left: 5px;
+    top: 5px;
+}
+.confirm-request-btn {
+    float: right;
+    position:absolute;
+    right: 5px;
+    top: auto;
+    bottom: auto;
+}
 .post-content {
     margin-top: 2%;
     margin-left: 1%;

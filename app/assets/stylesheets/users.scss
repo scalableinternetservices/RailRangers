@@ -1,3 +1,39 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.users-index-user {
+    border:1px solid black;
+    width: 20%;
+    padding: 30px;
+    margin: 5px 5px 5px 5px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    position:relative;
+}
+.requester-name {
+    float: left;
+    position:absolute;
+    left: 5px;
+    top: 5px;
+}
+.confirm-btn {
+    float: right;
+    position:absolute;
+    right: 5px;
+    top: auto;
+    bottom: auto;
+
+}
+.add-friend-btn {
+    float: right;
+    position:absolute;
+    right: 5px;
+    top: auto;
+    bottom: auto;
+}
+.send-msg-btn {
+    float: right;
+    position:absolute;
+    right: 5px;
+    top: 25px;
+    bottom: 25px;
+}
+

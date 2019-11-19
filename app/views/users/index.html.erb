@@ -6,15 +6,18 @@
       <% @users.each do |user| %>
         <% next if user == current_user %>
           <div class="users-index-user">
-            <%= link_to user_path(user) do %>
-              <%= user.username %>
-
+              <div class="requester_name">
+                <%= link_to user_path(user) do %>
+                <%= user.username %>
+              </div>
                 <% if current_user.requesters.where('requests.accepted = ?', false).include?(user) %>
-                  <%= button_to "Confirm", request_path(id: current_user.received_requests.find_by(requester_id: user.id).id, request: { requester_id: user.id }), method: :put %>
+                  <%= button_to "Confirm", request_path(id: current_user.received_requests.find_by(requester_id: user.id).id, request: { requester_id: user.id }), method: :put , class: "confirm-btn"%>
                 <% elsif current_user.requesters.where('requests.accepted = ?', true).include?(user) %>
-                    <%= "Message" %>
+                  <div class="send-msg-btn">
+                      <%= "Message" %>
+                  </div>
                 <% elsif !current_user.requestees.include?(user) %>
-                  <%= button_to "Add Friend", new_request_path(request: { requestee_id: user.id }), method: :get, class: "add-friend-button users-index-button" %>                  
+                  <%= button_to "Add Friend", new_request_path(request: { requestee_id: user.id }), method: :get, class: "add-friend-btn" %>                  
                 <% end %>
             <% end %>
           </div>
