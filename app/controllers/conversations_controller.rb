@@ -20,7 +20,9 @@ class ConversationsController < ApplicationController
       @conversation = Conversation.create!(conversation_params)
     end
 
-    render json: { conversation_id: @conversation.id }
+    respond_to do |format|
+      format.html{ redirect_to conversations_url(id: @conversation.id)}
+    end
   end
 
   def show
