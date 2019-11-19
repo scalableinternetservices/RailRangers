@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :messages
    end
    get 'login', to: 'sessions#new'
+   get 'logout', to: 'sessions#destroy'
    get 'user', to: 'users#show'
    get 'users', to: 'users#index'
    post 'requests', to: 'requests#create'

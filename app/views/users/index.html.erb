@@ -20,7 +20,7 @@
                 </div>
               <% elsif !current_user.requestees.include?(user) %>
                 <div class="add-friend-btn">
-                <%= button_to "Add Friend", new_request_path(request: { requestee_id: user.id }), method: :get%> 
+                <%= button_to "Add Friend", requests_path(request: { requestee_id: user.id }), method: :post %> 
               </div>                 
               <% end %>
             <% end %>

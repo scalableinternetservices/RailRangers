@@ -26,16 +26,23 @@ class RequestsController < ApplicationController
   # POST /requests
   # POST /requests.json
   def create
-    @request =  current_user.sent_requests.build(request_params)
+    # @request =  current_user.sent_requests.build(request_params)
 
-    respond_to do |format|
-      if @request.save
-        format.html { redirect_to posts_url, notice: 'Friend request sent!' }
-        format.json { render :show, status: :created, location: @request }
-      else
-        format.html { redirect_to posts_url, notice: 'Failed to send a friend request!' }
-        format.json { render json: @request.errors, status: :unprocessable_entity }
-      end
+    # respond_to do |format|
+    #   if @request.save
+    #     format.html { redirect_to posts_url, notice: 'Friend request sent!' }
+    #     format.json { render :show, status: :created, location: @request }
+    #   else
+    #     format.html { redirect_to posts_url, notice: 'Failed to send a friend request!' }
+    #     format.json { render json: @request.errors, status: :unprocessable_entity }
+    #   end
+    # end
+    @request = current_user.sent_requests.build(request_params)
+    if @request.save
+      flash[:success] = 'Friend request sent!'
+      redirect_to '/posts', notice: "Friend request sent!"
+    else
+      redirect_to '/posts', notice: "Friend request couldn't be sent"
     end
   end
 
