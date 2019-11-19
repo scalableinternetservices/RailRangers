@@ -3,6 +3,9 @@ Rails.application.routes.draw do
    resources :posts#, except: :index
    resources :comments
    resources :requests
+   resources :conversations do
+      resources :messages
+   end
    get 'login', to: 'sessions#new'
    get 'user', to: 'users#show'
    get 'users', to: 'users#index'
