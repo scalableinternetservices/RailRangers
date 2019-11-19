@@ -13,17 +13,11 @@
               </p>
             </div>
             <% if current_user.requesters.where('requests.accepted = ?', false).include?(user) %>
-<<<<<<< HEAD
-              <%= button_to "Confirm", request_path(id: current_user.received_requests.find_by(requester_id: user.id).id, request: { requester_id: user.id }), method: :put %>
-            <% end %>
-          </div>
-=======
               <div class="confirm-request-btn">
               <%= button_to "Confirm", request_path(id: current_user.received_requests.find_by(requester_id: user.id).id, request: { requester_id: user.id }), method: :put %>
               </div>
           <% end %>  
           </div>  
->>>>>>> benu
       <% end %>
     </div>
   </div>
