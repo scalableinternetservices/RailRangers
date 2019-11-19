@@ -6,6 +6,7 @@
 <%= link_to 'New Post', new_post_path %>
 <%= link_to 'Profile page', user_path(current_user) %>
 <%= link_to 'All Users', users_path %>
+<%= link_to 'Friend Requests', requests_path %>
 
 
 <div class="posts">
@@ -14,7 +15,7 @@
     <div class="post">
       <div class="post-header">
         <span class="user-time-post">
-          <%= link_to "#{post.user.username}", post, class: "username" %>
+          <%= link_to "#{post.user.username}", user_path(post.user), class: "username" %>
           <%= link_to distance_of_time_in_words(Time.now, post.created_at)+ ' ago', post, class: 'timestamp' %>
         </span>
       

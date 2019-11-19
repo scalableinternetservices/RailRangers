@@ -1,18 +1,23 @@
 <div>
   <h1>Friend Requests</h1>
+  <%= link_to 'New Request', new_request_path %>
 
   <div>
     <div>
       <% @users.each do |user| %>
-          <div>      
-            <p>
-              <%= user.username %>
-            </p>
-
+      <% next if user == current_user %>
+            <div class="confirm-requests">
+            <div class="requester">
+              <p>
+                <%= user.username %>
+              </p>
+            </div>
             <% if current_user.requesters.where('requests.accepted = ?', false).include?(user) %>
+              <div class="confirm-request-btn">
               <%= button_to "Confirm", request_path(id: current_user.received_requests.find_by(requester_id: user.id).id, request: { requester_id: user.id }), method: :put %>
-            <% end %>
-          </div>
+              </div>
+          <% end %>  
+          </div>  
       <% end %>
     </div>
   </div>
@@ -20,4 +25,4 @@
 
 <br>
 
-<%= link_to 'New Request', new_request_path %>
+
