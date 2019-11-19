@@ -21,13 +21,13 @@ class ConversationsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html{ redirect_to conversations_url(id: @conversation.id)}
+      format.html { redirect_to @conversation }
     end
   end
 
   def show
     @conversation = Conversation.find(params[:id])
-    @reciever = interlocutor(@conversation)
+    @receiver = interlocutor(@conversation)
     @messages = @conversation.messages
     @message = Message.new
   end
