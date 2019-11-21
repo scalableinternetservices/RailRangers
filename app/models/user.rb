@@ -11,4 +11,6 @@ class User < ApplicationRecord
      
      has_many :received_requests, foreign_key: :requestee_id, class_name: 'Request', dependent: :destroy
      has_many :requesters, through: :received_requests, dependent: :destroy
+
+     has_many :conversations, :foreign_key => :sender_id
 end

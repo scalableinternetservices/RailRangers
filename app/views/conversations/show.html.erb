@@ -1,0 +1,23 @@
+<h4 class="comment-head">Conversation:</h4>
+
+<% if @conversation.messages.count > 0 %>
+  <div class="all-conversations">
+    <% @conversation.messages.each do |message| %>
+      <p class="conversation">
+        <span class="conversation-content">
+        <strong><%= link_to "#{message.user.username}", class: "username" %></strong>
+        </span>
+        <span class="conversation-content">
+          <%= message.body %>
+        </span>
+      </p>
+    <% end %>
+  </div>
+<% end %>
+
+<h4 class="comment-head">New message:</h4>
+<%= form_for [@conversation, @conversation.messages.new] do |m| %>
+  <%= m.text_field :body, class: "comment-field", placeholder: "Write a message...", rows: "1" %>
+  <%= m.hidden_field :conversation_id, value: @conversation.id %>
+  <%= m.hidden_field :user_id, value: current_user.id %>
+<% end %>

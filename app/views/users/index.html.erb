@@ -1,0 +1,31 @@
+<div class="users-index">
+  <h1>All Users</h1>
+
+  <div class="all-users">
+    <div class="users-grid">
+      <% @users.each do |user| %>
+        <% next if user == current_user %>
+          <div class="users-index-user">
+              <div class="requester_name">
+                <%= link_to user_path(user) do %>
+                <%= user.username %>
+              </div>
+              <% if current_user.requesters.where('requests.accepted = ?', false).include?(user) %>
+                <div class="confirm-btn">
+                <%= button_to "Confirm", request_path(id: current_user.received_requests.find_by(requester_id: user.id).id, request: { requester_id: user.id }), method: :put%>
+                </div>
+              <% elsif current_user.requesters.where('requests.accepted = ?', true).include?(user) %>
+                <div class="send-msg-btn">
+                    <%= button_to "Message", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %>
+                </div>
+              <% elsif !current_user.requestees.include?(user) %>
+                <div class="add-friend-btn">
+                <%= button_to "Add Friend", requests_path(request: { requestee_id: user.id }), method: :post %> 
+              </div>                 
+              <% end %>
+            <% end %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
