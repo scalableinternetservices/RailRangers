@@ -8,7 +8,7 @@
           <div class="users-index-user">
               <div class="requester_name">
                 <%= link_to user_path(user) do %>
-                <%= user.username %>
+                <%= user.firstname %>
               </div>
               <% if current_user.requesters.where('requests.accepted = ?', false).include?(user) %>
                 <div class="confirm-btn">
