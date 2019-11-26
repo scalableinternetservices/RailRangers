@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-how_many = {user: 1000, posts_per_user: 5, friends_per_user: 50}
+how_many = {user: 500, posts_per_user: 3, friends_per_user: 3}
 password = 'password'
 # password_hash = User.digest(password)
 
@@ -38,6 +38,7 @@ posts.each do |post|
     post.comments.create(user_id: rand(1..how_many[:user]), comment: "Hello, this is a sample comment from user.")
   end
 end
+puts "Created comments.."
 
 
 # friends for each user:
@@ -53,5 +54,6 @@ how_many[:friends_per_user].times do
     User.find(requestee_id_num).sent_requests.create(requestee_id: user.id, accepted: true)
   end
 end
+puts "Created friends.."
 
 puts "Database seeded.."
