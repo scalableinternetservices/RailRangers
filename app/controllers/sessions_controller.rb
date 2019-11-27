@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
 	end
 
 	def seed_database
-		how_many = {user: 10, posts_per_user: 3, friends_per_user: 3}
+		how_many = {user: 500, posts_per_user: 3, friends_per_user: 50}
 		password = 'password'
 		# password_hash = User.digest(password)
 		
