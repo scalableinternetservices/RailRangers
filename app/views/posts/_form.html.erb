@@ -11,12 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :message %>
-    <%= form.text_field :message %>
+  <div class="post-field">
+    <%= form.label :message, class:"form-text-field", :style=> 'display: none;' %>
+    <%= form.text_field :message, placeholder: "Say something...", class:"form-text-field", :style=> 'border: none; width: 100%; height: 100px;'%>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="post-submit">
+    <%= form.submit "Post", class:"make-post", :style=> 'background-color: rgb(66,103,178); width: 100%; color: #FFFFFF;height: 30px;'%>
   </div>
+
 <% end %>

@@ -1,44 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE tsung SYSTEM "/usr/local/share/tsung/tsung-1.0.dtd" [] >
 <tsung loglevel="notice">
-<!--  Client side setup  -->
-<clients>
-<client host="localhost" use_controller_vm="true" maxusers="15000"/>
-</clients>
-<!--  Server side setup  -->
-<servers>
-<server host="bboe1.rjpnh4yphg.us-west-2.elasticbeanstalk.com" port="80" type="tcp"/>
-</servers>
-<load>
-<arrivalphase phase="1" duration="10" unit="second">
-	<users arrivalrate="1" unit="second"/>
-</arrivalphase>
-<arrivalphase phase="2" duration="10" unit="second">
-  <users arrivalrate="2" unit="second"></users>
-</arrivalphase>
-</load>
-<options>
-<!--  Set connection timeout to 2 seconds  -->
-<option name="global_ack_timeout" value="2000"/>
-</options>
-<sessions>
-	<session name="Create Tweet" probability="100" type="ts_http">
-		<request>
-			<http url="/"/>
-		</request>
-		<request>
-			<dyn_variable name="authenticity_token"/>
-			<http url="/tweets/new"/>
-		</request>
-			<setdynvars sourcetype="eval" code="fun({Pid,DynVars})->{ok,Val}=ts_dynvars:lookup(authenticity_token,DynVars),re:replace(Val,"[+]","%2B",[global, {return,list}]) end.">
-			<var name="authenticity_token"/>
-			</setdynvars>
-			<thinktime random="true" value="2"/>
-		<request subst="true">
-			<dyn_variable name="created_tweet_id" re="Location: http://.*/tweets/(.*)\r"/>
-			<http url="/tweets" method="POST" contents="authenticity_token=%%_authenticity_token%%&tweet%5Bmessage%5D=Hello&tweet%5Bauthor%5D=blah"/>
-		</request>
-		<request subst="true">
-			<http url="/tweets/%%_created_tweet_id%%"/>
-		</request>
-	</session>
-</sessions>
+
+  <!-- Client side setup -->
+  <clients>
+    <client host="localhost" use_controller_vm="true" maxusers='15000'/>
+  </clients>
+
+  <!-- Server side setup -->
+  <servers>
+    <server host="railrangers.d2m6adum4h.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
+  </servers>
+  <load>
+    <arrivalphase phase="1" duration="10" unit="second" wait_all_sessions_end="true">
+      <users arrivalrate="1" unit="second"></users>
+    </arrivalphase>
+
+    <arrivalphase phase="2" duration="10" unit="second" wait_all_sessions_end="true">
+      <users arrivalrate="2" unit="second"></users>
+    </arrivalphase>
+  </load>
+
+  <options>
+    <!-- Set connection timeout to 2 seconds -->
+    <option name="global_ack_timeout" value="2000"></option>
+  </options>
+
+  <sessions>
+    <session name="Check profiles" probability="100" type="ts_http">
+      <request>
+        <http url='/welcome' method="GET"></http>
+      </request>
+      <request>
+        <dyn_variable name="authenticity_token"></dyn_variable>
+        <http url='/users/new' method="GET"></http>
+      </request>
+      <setdynvars sourcetype="eval" code="fun({Pid,DynVars})->{ok,Val}=ts_dynvars:lookup(authenticity_token,DynVars),re:replace(Val,&quot;[+]&quot;,&quot;%2B&quot;,[global, {return,list}]) end.">
+        <var name="authenticity_token"/>
+      </setdynvars>
+      <setdynvars sourcetype="random_number" start="1" end="10000000">
+            <var name="rndint" />
+      </setdynvars>
+      <setdynvars sourcetype="random_number" start="2000" end="2019">
+            <var name="rndyear" />
+      </setdynvars>
+      <setdynvars sourcetype="random_number" start="10" end="12">
+            <var name="rndmonth" />
+      </setdynvars>
+      <setdynvars sourcetype="random_number" start="10" end="28">
+            <var name="rndday" />
+      </setdynvars>
+      <request subst="true">
+        <http url='/users' version='1.1' method='POST' contents="authenticity_token=%%_authenticity_token%%&amp;user%5Busername%5D=user%%_rndint%%&amp;user%5Bfirstname%5D=User%%_rndint%%&amp;user%5Blastname%5D=Surname%%_rndint%%&amp;user%5BDOB%5D=%%_rndyear%%-%%_rndmonth%%-%%_rndday%%&amp;user%5Bpassword%5D=user3"></http>
+      </request>
+      
+      <request subst="true">
+      	<dyn_variable name="userid" re="\/users\/(.*)>&quot;Profile page"></dyn_variable>
+      	<http url='/posts' version='1.1' method='GET'></http>
+      </request>
+      <request subst="true">
+      	<http url='/users' version='1.1' method='GET'></http>
+      </request>
+      <request subst="true">
+      	<dyn_variable name="authenticity_token"></dyn_variable>
+      	<http url='/requests/new' version='1.1' method='GET'></http>
+      </request>
+      <request subst="true">
+      	<http url='/requests' version='1.1' method='POST' contents="authenticity_token=%%_authenticity_token%%&amp;request%5Brequester_id%5D=%%_userid%%&amp;request%5Brequestee_id%5D=1&amp;request%5Baccepted%5D=0&amp;request%5Baccepted%5D=1"></http>
+      </request>
+    </session>
+  </sessions>
 </tsung>
