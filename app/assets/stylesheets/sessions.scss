@@ -1,3 +1,40 @@
 // Place all the styles related to the sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.welcome-page {
+	position: absolute;
+    background-color: gainsboro;    
+    width: 100%;
+    top:0;
+    left:0;
+    bottom:0;
+}
+.login-form {
+	display: flex;
+	flex-direction: row;
+	position: relative;
+}
+.login-part {
+	width: 50%;
+	margin: 0 auto;
+}
+.login-submit {
+	margin-top: 15px;
+	padding: 1px;
+}
+.signup-form {
+	width: 50%;
+	margin: 0 auto;
+	padding-top: 20px;
+}
+.dob-label {
+	padding-right: 10px;
+}
+.signup-dob {
+	display: flex;
+	flex-direction: row;
+	padding-top: 15px;
+}
+.signup-submit {
+	padding-top: 10px;
+}
