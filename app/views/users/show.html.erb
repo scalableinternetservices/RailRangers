@@ -1,57 +1,111 @@
-<h1><%= @user.username %></h1>
-<h3><%= @user.firstname %></h3>
-<h3><%= @user.lastname %></h3>
-<h3><%= @user.DOB %></h3>
+<div class="profile-page">
+	<div class="navbar">
+        <div class="link-all-users">
+          <%= link_to 'All Users', users_path, :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+        </div>
+        <div class="link-home">
+          <%= link_to 'Home', posts_path, :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+        </div>
+        <div class="link-profile">
+          <%= link_to "#{current_user.firstname}", user_path(current_user), :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+        </div>
+        <div class="link-requests">
+          <%= link_to 'Friend Requests', requests_path, :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+        </div>
+        <div class="link-signout">
+          <%= link_to 'Log out', logout_path, :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+        </div>
+    </div>
+ <div class="profile-posts">
+	<div class="profile-info">
+		<div class="user-details">
+			<div class="user-name">
+				<h1><%= @user.username %></h1>
+			</div>
+			<div class="full-name">
+				<div class="first-name">
+					<h3><%= @user.firstname %></h3>
+				</div>
+				<div class="last-name">
+					<h3><%= @user.lastname  %></h3>
+				</div>
+			</div>
+			<div class="dob">
+				<h3><%= @user.DOB %></h3>
+			</div>
+		</div>
+	</div>
+<div class="posts-and-friends">
+	<div class="friends-list">
+		 <div class="friends-header">
+        	<h2>Friends</h2>
+      	</div>
+      	<div class="friends">
+			<% @friends.each do |user| %>
+				 <div class="users-index-user">
+					<div class="requester_name">
+		                <%= link_to user_path(user) do %>
+		                <%= user.firstname %>
+		              </div>
+			        <div class="send-msg-btn">
+			            <%= button_to "Message", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %>
+			        </div>
+			       <% end %>
+		   		</div>
+	      	<% end %>
+	     </div>
+	</div>
+	<div class="user-posts">
 
-<div class="profile-posts">
+	  <% @posts.each do |post| %>
+	  	<% next if post.user != @user %>
+		    <div class="profile-post">
+		      <div class="post-header">
+		        <span class="user-time-post">
+		          <%= link_to "#{post.user.firstname}", post, class: "username" %>
+		          <%= link_to distance_of_time_in_words(Time.now, post.created_at)+ ' ago', post, class: 'timestamp' %>
+		        </span>
+		      
+		        <span class="edit-delete-post">
+		          <%= link_to 'Edit Post', edit_post_path(post) %>
+		          <%= link_to 'Delete', post, method: :delete, data: {confirm: "Are you sure?"} %>
+		        </span>
+		      </div>
+		  
+		  
+		      <div class="post-content">
+		        <p><%= post.message %><br/></p>
+		      </div>
 
-  <% @posts.each do |post| %>
-  	<% next if post.user != @user %>
-	    <div class="post">
-	      <div class="post-header">
-	        <span class="user-time-post">
-	          <%= link_to "#{post.user.firstname}", post, class: "username" %>
-	          <%= link_to distance_of_time_in_words(Time.now, post.created_at)+ ' ago', post, class: 'timestamp' %>
-	        </span>
-	      
-	        <span class="edit-delete-post">
-	          <%= link_to 'Edit Post', edit_post_path(post) %>
-	          <%= link_to 'Delete', post, method: :delete, data: {confirm: "Are you sure?"} %>
-	        </span>
-	      </div>
-	  
-	  
-	      <div class="post-content">
-	        <p><%= post.message %><br/></p>
-	      </div>
-
-	      <br/>
+		      <br/>
 
 
-	      <h4 class="comment-head">Comments</h4>
+		      <h4 class="comment-head">Comments</h4>
 
-	      <% if post.comments.count > 0 %>
-	      <div class="all-comments">
-	        <% post.comments.each do |comment| %>
-	          <p class="comment">
-	            <span class="comment-content">
-	              <strong><%= link_to "#{comment.user.firstname}", class: "username" %></strong> <%= comment.comment %>
-	            </span>
-	            <span class="edit-delete-comment">
-	              <%= link_to 'Edit', edit_comment_path(comment) %>
-	              <%= link_to 'Delete', comment, method: :delete, data: {confirm: "Are you sure?"} %>
-	            </span>
-	          </p>
-	        <% end %>
-	      </div>
-	      <% end %>
+		      <% if post.comments.count > 0 %>
+		      <div class="all-comments">
+		        <% post.comments.each do |comment| %>
+		          <p class="comment">
+		            <span class="comment-content">
+		              <strong><%= link_to "#{comment.user.firstname}", class: "username" %></strong> <%= comment.comment %>
+		            </span>
+		            <span class="edit-delete-comment">
+		              <%= link_to 'Edit', edit_comment_path(comment) %>
+		              <%= link_to 'Delete', comment, method: :delete, data: {confirm: "Are you sure?"} %>
+		            </span>
+		          </p>
+		        <% end %>
+		      </div>
+		      <% end %>
 
-	      <%= form_for(@comment) do |c| %>
-	        <%= c.text_field :comment, class: "comment-field", placeholder: "Write a comment...", rows: "1" %>
-	        <%= c.hidden_field :post_id, value: post.id %>
-	      <% end %>
-	    </div>
-  <% end %>
+		      <%= form_for(@comment) do |c| %>
+		        <%= c.text_field :comment, class: "comment-field", placeholder: "Write a comment...", rows: "1" %>
+		        <%= c.hidden_field :post_id, value: post.id %>
+		      <% end %>
+		    </div>
+	  <% end %>
 
-
+	</div>
+</div>
+</div>
 </div>
