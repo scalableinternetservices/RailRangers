@@ -15,8 +15,8 @@ Rails.application.routes.draw do
    get 'new_request', to: 'requests#new'
    put 'request', to: 'request#update'
    post 'login', to: 'sessions#create'
-   get 'welcome', to: 'sessions#welcome'
-   root 'sessions#welcome'
+   get 'welcome', to: 'sessions#new'
+   root 'sessions#new'
    get 'posts', to: 'posts#index'
    get 'authorized', to: 'sessions#page_requires_login'
 end

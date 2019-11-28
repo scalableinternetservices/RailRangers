@@ -1,6 +1,45 @@
-<h1>Welcome</h1>
-<% if logged_in? %>
-    <h1>You are Logged In, <%= current_user.username %></h1>
-<%end%>
-<%= button_to "Login", '/login', method: :get%>
-<%= button_to "Sign Up", '/users/new', method: :get%>
+<div class="welcome-page">
+	<div class="login-form">
+	   <%= form_tag '/login' do %>
+	   <div class="login-username">
+		   <%= label_tag :username, class:"form-text-field", :style=> 'display: none;'%>
+		   <%= text_field_tag :username, placeholder: "Enter your username", class:"form-text-field", :style=> 'width: 100%; height: 100px;' %>
+		</div>
+		<div class="login-password">
+		   <%= label_tag :password, class:"form-text-field", :style=> 'display: none;'%>
+		   <%= password_field_tag :password, placeholder: "Enter password", class:"form-text-field", :style=> 'width: 100%; height: 100px;'%>
+		</div>
+		<div class="login-submit">
+	    <%= submit_tag "Login", class:"login", :style=> 'background-color: rgb(66,103,178); width: 100%; color: #FFFFFF;height: 30px;'%>
+		</div>
+	<%end%>
+	</div>
+	<div class="signup-form">
+		<h1>Sign Up</h1>
+		<%= form_for @user do |f|%>
+			<div class="signup-username">
+				<%= f.label :username%><br>
+				<%= f.text_field :username%><br>
+			</div>
+			<div class="signup-firstname">
+				<%= f.label :firstname%><br>
+				<%= f.text_field :firstname%><br>
+			</div>
+			<div class="signup-lastname">
+				<%= f.label :lastname%><br>
+				<%= f.text_field :lastname%><br>
+			</div>
+			<div class="signup-dob">
+				<%= f.label :DOB%><br>
+				<%= f.text_field :DOB, type: :date%><br>
+			</div>
+			<div class="signup-password">
+				<%= f.label :password%><br>
+				<%= f.password_field :password%><br>
+			</div>
+			<div class="signup-submit">
+				<%= f.submit "Signup", class:"signup", :style=> 'background-color: rgb(66,103,178); width: 100%; color: #FFFFFF;height: 30px;'%>
+			</div>
+		<%end%>
+	</div>
+</div>
