@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="railrangers.yxhf954iam.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
+    <server host="railrangersdeploy.yxhf954iam.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
   </servers>
   <load>
     <arrivalphase phase="1" duration="60" unit="second" wait_all_sessions_end="true">
@@ -49,16 +49,18 @@
           <http url='/login' method="GET"></http>
         </request>
         <request>
-          <http url='/login' method="POST" contents="username=user1&amp;password=user1"></http>
+          <http url='/login' method="POST" contents="username=user1&amp;password=password"></http>
         </request>
         <request subst="true">
           <http url='/posts' version='1.1' method='GET'></http>
         </request>
         <request subst="true">
+          <dyn_variable name="requestee_id"
+                regexp="/requests\?request%5Brequestee_id%5D=(\d+)"/>
           <http url='/users' version='1.1' method='GET'></http>
         </request>
         <request subst="true">
-          <http url='/requests' version='1.1' method='POST' contents="request%5Brequestee_id%5D=3"></http>
+          <http url='/requests' version='1.1' method='POST' contents="request%5Brequestee_id%5D=%%_requestee_id%%"></http>
         </request>
     </session>
   </sessions>

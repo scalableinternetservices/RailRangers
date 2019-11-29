@@ -24,7 +24,7 @@
       </div>
       <div class="posts">
 
-        <% @posts.each do |post| %>
+        <%  @posts.each do |post| %>
           <div class="post">
             <div class="post-header">
               <span class="user-time-post">
@@ -70,9 +70,10 @@
             <% end %>
           </div>
         <% end %>
-
-
       </div>
+      <div class="page">
+      <%= will_paginate @posts %>
+    </div>
   </div>
 </div>
 
