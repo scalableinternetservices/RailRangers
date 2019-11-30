@@ -4,15 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-<<<<<<< HEAD
     @posts = Post.paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
-    respond_to do |format|
-      format.html
-      format.js
-    end
-=======
-    @posts = Post.all.order("created_at DESC")
->>>>>>> parent of 336d4ac... Added basic pagination
     @comment = Comment.new
     @post = Post.new
   end

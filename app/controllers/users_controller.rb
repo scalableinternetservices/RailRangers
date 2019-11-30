@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 	skip_before_action :authorized, only: [:show, :index, :new, :edit, :create]
 	def index
 	    # @users = User.all
-	    @users = User.where('id != ?' , current_user.id)
+	    @users = User.where('id != ?' , current_user.id).paginate(:page => params[:page], :per_page => 5)
 	    @friends = current_user.friends
   	end
 	def show

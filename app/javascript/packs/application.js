@@ -4,15 +4,12 @@
 // that code so it'll be compiled.
 //= require jquery
 //= require bootstrap-sprockets
-require("jquery")
-require("bootstrap-sprockets")
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("bootstrap")
-require("packs/pagination.js.coffee")
-require("posts")
+
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
