@@ -24,7 +24,7 @@ gem 'bcrypt', '~> 3.1.7'
 #gem 'jquery-rails', '~> 4.0.5'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-gem 'will_paginate', '~> 3.1.1'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'jquery-rails'
