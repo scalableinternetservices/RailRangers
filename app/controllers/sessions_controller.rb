@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
 	end
 
 	def seed_database
-		how_many = {user: 500, posts_per_user: 3, friends_per_user: 50}
+		how_many = {user: 500, posts_per_user: 3, friends_per_user: 20}
 		password = 'password'
 		# password_hash = User.digest(password)
 		
@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
 		puts "Created #{User.count} users"
 		
 		
-		# 5 posts for each user:
+		# posts for each user:
 		how_many[:posts_per_user].times do
 		  users.each { |user| user.posts.create(message: "Hello, this is a sample seed post from user.") }
 		end
@@ -60,7 +60,16 @@ class SessionsController < ApplicationController
 		  end
 		end
 		puts "Created comments.."
-		
+
+		# immediate user as friend user:
+		users.each do |user|
+		  requestee_id_num = user.id + 1
+		  if requestee_id_num <= how_many[:user] && !user.requestees.include?(User.find(requestee_id_num))
+			user.sent_requests.create(requestee_id: requestee_id_num, accepted: true)
+			User.find(requestee_id_num).sent_requests.create(requestee_id: user.id, accepted: true)
+		  end		
+		end
+		puts "Created immediate user friends.."		
 		
 		# friends for each user:
 		how_many[:friends_per_user].times do
