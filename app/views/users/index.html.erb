@@ -1,14 +1,34 @@
 <div class="users-index">
-  <h1>All Users</h1>
-
-  <div class="all-users">
+  
+    <div class="navbar">
+        <div class="link-all-users">
+          <%= link_to 'All Users', users_path, :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+        </div>
+        <div class="link-home">
+          <%= link_to 'Home', posts_path, :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+        </div>
+        <div class="link-profile">
+          <%= link_to "#{current_user.firstname}", user_path(current_user), :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+        </div>
+        <div class="link-requests">
+          <%= link_to 'Friend Requests', requests_path, :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+        </div>
+        <div class="link-signout">
+          <%= link_to 'Log out', logout_path, :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+        </div>
+    </div>
+  <div class="all-users">  
+    <div class="users-container">
+      <div class="users-header">
+        <h1>All Users</h1>
+      </div>
     <div class="users-grid">
       <% @users.each do |user| %>
         <% next if user == current_user %>
           <div class="users-index-user">
               <div class="requester_name">
-                <%= link_to user_path(user) do %>
-                <%= user.username %>
+                <%= link_to user_path(user), class: "username",:style=> 'color:#4169E1;text-decoration: none;padding: 5px;' do %>
+                <%= user.firstname %>
               </div>
               <% if current_user.requesters.where('requests.accepted = ?', false).include?(user) %>
                 <div class="confirm-btn">
@@ -28,4 +48,5 @@
       <% end %>
     </div>
   </div>
+</div>
 </div>

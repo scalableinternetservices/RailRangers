@@ -1,11 +1,122 @@
-.users-index-user {
-    border:1px solid black;
-    width: 20%;
-    padding: 30px;
-    margin: 5px 5px 5px 5px;
-    border-radius: 10px;
+.profile-page {
+    position: absolute;
+    background-color: gainsboro;    
+    width: 100%;
+    top:0;
+    left:0;
+    bottom:0;
+}
+.profile-posts {
+    position: absolute;
+    width: 100%;
+    background-color: gainsboro;  
+    left:0;
+    padding: 10px;
+    padding-top: 0px;
+}
+.profile-info {
+    position: relative;
+    background-image: linear-gradient(to top, gray , white);  
+    color: white;
+    border-radius: 3px;
+    width: 49%;
+    height: 300px;
+    margin: 0 auto;
+    left:0;
+    padding: 10px;
+    padding-top: 20px;
+}
+.user-details {
+    position: absolute;
+    bottom: 0;
+}
+.full-name {
     display: flex;
     flex-direction: row;
+}
+.first-name {
+    padding-right: 5px;
+}
+
+.link-all-users {
+  padding: 10px;
+}
+.link-home {
+    padding: 10px;
+    margin-left: 700px;
+}
+.link-requests {
+    padding: 10px;
+}
+.link-profile {
+    padding: 10px;
+}
+.link-signout {
+    padding: 10px;
+}
+.users-header {
+    top: 0;
+    padding-top: 40px;
+    padding-left: 20px;
+}
+.all-users {
+    position: absolute;
+    background-color: gainsboro;    
+    width: 100%;
+    padding-top: 10px;
+    top: 0;
+    left:0;
+    bottom:0;
+}
+.users-container {
+    background-color: white;    
+    width: 70%;
+    margin: 0 auto;
+    top:0;
+    left:0;
+    bottom:0;   
+}
+.posts-and-friends {
+    position: relative;
+    width: 51%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+.friends-list {
+    width: 30%;
+}
+.friends-header {
+    padding-left: 10px;
+}
+.user-posts {
+    margin-top: 5px;
+    width: 70%;
+}
+.profile-post {
+    border: 1px solid gray;
+    background-color: white;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+
+}
+.users-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+
+}
+.users-index-user {
+    background-color: white; 
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 30px;
+    margin: 5px 5px 5px 5px;
+    display: flex;
+    flex-direction: column;
     position:relative;
 }
 .requester-name {
@@ -13,27 +124,20 @@
     position:absolute;
     left: 5px;
     top: 5px;
+    text-decoration: none;
+    color: #4169E1;
 }
 .confirm-btn {
-    float: right;
-    position:absolute;
-    right: 5px;
     top: auto;
     bottom: auto;
 
 }
 .add-friend-btn {
-    float: right;
-    position:absolute;
-    right: 5px;
     top: auto;
     bottom: auto;
 }
 .send-msg-btn {
-    float: right;
-    position:absolute;
-    right: 5px;
-    top: 25px;
-    bottom: 25px;
+    top: auto;
+    bottom: auto;
 }
 

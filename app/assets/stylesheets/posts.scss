@@ -2,9 +2,72 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.body {
+    background-color: gainsboro;    
+    width: 100%;
+    top:0;
+    left:0;
+    bottom:0;
+}
+.body-content {  
+    position: absolute;
+    width: 100%;
+    background-color: gainsboro;  
+    top:0;
+    left:0;
+    padding: 10px;
+    padding-top: 40px;
+}
+ .navbar {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top:0;
+  left:0;
+  z-index:100;
+  top:0;
+  background-color: rgb(66,103,178);
+  width: 100%;
+}
+.form {
+    outline: none;
+    border: none;
+}
+.link-newpost {
+    padding: 10px;
+    padding-left: 30px;
+}
+.post-field {
+    margin: 0 auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.post-submit {
+    margin: 0 auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.link-all-users {
+  padding: 10px;
+  margin-left: 20px;
+}
+.link-user-name {
+    padding: 10px;
+    margin-left: 700px;
+}
+.link-requests {
+    padding: 10px;
+}
+.link-signout {
+    padding: 10px;
+}
+.link-login a, .link-signup a{
+  font-size: 14px;
+}
 .posts {
     grid-area: 2 / 2 / 3 / 3;
     margin-top: 20px;
+
 }
 
 
@@ -14,19 +77,32 @@
 }
 
 .post {
-    border: 3px solid black;
+    border: 1px solid gray;
     background-color: white;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    border-radius: 3px;
+    margin-bottom: 20px;
     padding-bottom: 5px;
     padding-left: 5px;
+    padding-top: 5px;
+    width: 50%;
+    margin: 0 auto;
 }
 
 .post-header {
     position: relative;
-    padding-top: 0.1%;
+    padding-top: 1%;
 }
-
+.new-post {
+    border: 1px solid gray;
+    width: 50%;
+    background-color: white;
+    border-radius: 3px;
+    margin: 0 auto;
+    margin-bottom: 13px;
+    padding-bottom: 6.5px;
+    padding-left: 6.5px;
+    padding-right: 6.5px;
+}
 .user-time-post {
     position: absolute;
     left: 10px;
@@ -34,10 +110,11 @@
 }
 
 .username {
-    color: rgb(8, 84, 238);
-    font-size: 20px;
+    color: royalblue;
+    font-size: 15px;
     font-weight: bold;
     margin-right: 5px;
+    padding-top: 10px;
 }
 
 .edit-delete-post {
@@ -79,8 +156,7 @@
     margin-top: 2%;
     margin-left: 1%;
     font-size: 14px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 10px;
 }
 
 .comment-head {

@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 		@user = User.find_by(id: params[:id])
 		@posts = User.find_by(id: params[:id]).posts
 		@comment = Comment.new
+		@friends = current_user.friends
 	end
 	def new
 	   @user = User.new
@@ -17,7 +18,7 @@ class UsersController < ApplicationController
   	end
 	def create
 	   @user = User.create(params.require(:user).permit(:username,        
-	   :password))
+	   :password, :firstname, :lastname, :DOB))
 	   session[:user_id] = @user.id
 	   redirect_to '/posts'
 	end
