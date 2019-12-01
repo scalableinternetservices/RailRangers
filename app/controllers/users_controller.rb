@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   	end
 	def show
 		@user = User.find_by(id: params[:id])
-		@posts = User.find_by(id: params[:id]).posts
+		@posts = @user.posts.includes(comments: :user)
 		@comment = Comment.new
 		@friends = current_user.friends
 	end

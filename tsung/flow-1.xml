@@ -26,7 +26,7 @@
     <arrivalphase phase="4" duration="60" unit="second" wait_all_sessions_end="true">
       <users arrivalrate="8" unit="second"></users>
     </arrivalphase>
-    <!-- <arrivalphase phase="5" duration="60" unit="second" wait_all_sessions_end="true">
+    <arrivalphase phase="5" duration="60" unit="second" wait_all_sessions_end="true">
       <users arrivalrate="16" unit="second"></users>
     </arrivalphase>
     <arrivalphase phase="6" duration="60" unit="second" wait_all_sessions_end="true">
@@ -34,7 +34,7 @@
     </arrivalphase>
     <arrivalphase phase="7" duration="60" unit="second" wait_all_sessions_end="true">
       <users arrivalrate="64" unit="second"></users>
-    </arrivalphase> -->
+    </arrivalphase> 
   </load>
 
   <options>
