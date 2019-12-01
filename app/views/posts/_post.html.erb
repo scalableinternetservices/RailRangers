@@ -21,7 +21,6 @@
 
   <h4 class="comment-head">Comments</h4>
 
-  <% if post.comments.count > 0 %>
   <div class="all-comments">
     <% post.comments.each do |comment| %>
       <p class="comment">
@@ -35,7 +34,7 @@
       </p>
     <% end %>
   </div>
-  <% end %>
+
 
   <%= form_for(@comment) do |c| %>
     <%= c.text_field :comment, class: "comment-field", placeholder: "Write a comment...", rows: "1" %>
