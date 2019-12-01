@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.paginate(:page => params[:page], :per_page => 50).order("created_at DESC")
+    @posts = Post.includes(:comments).paginate(:page => params[:page], :per_page => 50).order("created_at DESC")
     @comment = Comment.new
     @post = Post.new
   end
