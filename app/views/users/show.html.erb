@@ -42,7 +42,6 @@
       	</div>
       	<div class="friends">
 			<% @friends.each do |user| %>
-				<% cache user do %>
 				 <div class="users-index-user">
 					<div class="requester_name">
 		                <%= link_to user_path(user) do %>
@@ -54,13 +53,11 @@
 			       <% end %>
 		   		</div>
 	      	<% end %>
-	      	<% end %>
 	     </div>
 	</div>
 	<div class="user-posts">
 
 	  <% @posts.each do |post| %>
-	  <% cache post do %>
 	  	<% next if post.user != @user %>
 		    <div class="profile-post">
 		      <div class="post-header">
@@ -107,7 +104,7 @@
 		      <% end %>
 		    </div>
 	  <% end %>
-	  <% end %>
+
 	</div>
 </div>
 </div>

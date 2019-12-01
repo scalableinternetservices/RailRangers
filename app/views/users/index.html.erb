@@ -24,7 +24,7 @@
       </div>
     <div class="users-grid">
       <% @users.each do |user| %>
-        <% cache user do %>
+
         <% next if user == current_user %>
           <div class="users-index-user">
               <div class="requester_name">
@@ -46,7 +46,6 @@
               <% end %>
             <% end %>
           </div>
-      <% end %>
       <% end %>
     </div>
     <div id="users-page">
