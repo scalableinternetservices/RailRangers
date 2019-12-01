@@ -1,5 +1,5 @@
 <div class="post">
-
+  <% cache post do %>
   <div class="post-header">
     <span class="user-time-post">
       <%= link_to "#{post.user.username}", user_path(post.user),:style=> 'color:#4169E1;text-decoration: none;', class: "username" %>
@@ -12,18 +12,18 @@
     </span>
   </div>
 
-
+  
   <div class="post-content">
-    <p><%= post.message %><br/></p>
+    <p><%= post.message %></p>
   </div>
-
-  <br/>
+  
 
 
   <h4 class="comment-head">Comments</h4>
 
   <div class="all-comments">
     <% post.comments.each do |comment| %>
+
       <p class="comment">
         <span class="comment-content">
           <strong><%= link_to "#{comment.user.username}", class: "username" %></strong> <%= comment.comment %>
@@ -33,6 +33,7 @@
           <%= link_to 'Delete', comment, method: :delete, data: {confirm: "Are you sure?"} %>
         </span>
       </p>
+
     <% end %>
   </div>
 
@@ -41,5 +42,5 @@
     <%= c.text_field :comment, class: "comment-field", placeholder: "Write a comment...", rows: "1" %>
     <%= c.hidden_field :post_id, value: post.id %>
   <% end %>
-
+<% end %>
 </div>

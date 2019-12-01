@@ -42,6 +42,7 @@
       	</div>
       	<div class="friends">
 			<% @friends.each do |user| %>
+				<% cache user do %>
 				 <div class="users-index-user">
 					<div class="requester_name">
 		                <%= link_to user_path(user) do %>
@@ -52,12 +53,14 @@
 			        </div>
 			       <% end %>
 		   		</div>
+		   	<% end %>
 	      	<% end %>
 	     </div>
 	</div>
 	<div class="user-posts">
 
 	  <% @posts.each do |post| %>
+	  	<% cache post do %>
 	  	<% next if post.user != @user %>
 		    <div class="profile-post">
 		      <div class="post-header">
@@ -102,6 +105,7 @@
 		        <%= c.hidden_field :post_id, value: post.id %>
 		      <% end %>
 		    </div>
+	  <% end %>
 	  <% end %>
 
 	</div>
