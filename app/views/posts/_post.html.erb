@@ -1,5 +1,5 @@
 <div class="post">
-
+  <% cache post do %>
   <div class="post-header">
     <span class="user-time-post">
       <%= link_to "#{post.user.username}", user_path(post.user),:style=> 'color:#4169E1;text-decoration: none;', class: "username" %>
@@ -41,5 +41,5 @@
     <%= c.text_field :comment, class: "comment-field", placeholder: "Write a comment...", rows: "1" %>
     <%= c.hidden_field :post_id, value: post.id %>
   <% end %>
-
+  <% end %>
 </div>
