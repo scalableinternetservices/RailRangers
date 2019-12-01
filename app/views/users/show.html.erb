@@ -87,6 +87,7 @@
 
 		      <div class="all-comments">
 		        <% post.comments.each do |comment| %>
+		          <% cache comment do %>
 		          <p class="comment">
 		            <span class="comment-content">
 		              <strong><%= link_to "#{comment.user.firstname}", class: "username" %></strong> <%= comment.comment %>
@@ -96,6 +97,7 @@
 		              <%= link_to 'Delete', comment, method: :delete, data: {confirm: "Are you sure?"} %>
 		            </span>
 		          </p>
+		        <% end %>
 		        <% end %>
 		      </div>
 
