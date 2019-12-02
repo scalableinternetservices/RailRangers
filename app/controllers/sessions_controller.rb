@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
 	end
 
 	def seed_database
-		how_many = {user: 500, posts_per_user: 3, friends_per_user: 20}
+		how_many = {user: 500, posts_per_user: 3, friends_per_user: 20, messages_per_user: 100}
 		password = 'password'
 		# password_hash = User.digest(password)
 		
@@ -67,6 +67,17 @@ class SessionsController < ApplicationController
 		  if requestee_id_num <= how_many[:user] && !user.requestees.include?(User.find(requestee_id_num))
 			user.sent_requests.create(requestee_id: requestee_id_num, accepted: true)
 			User.find(requestee_id_num).sent_requests.create(requestee_id: user.id, accepted: true)
+
+			conversation = Conversation.create!({ sender_id: user.id, recipient_id: requestee_id_num})
+			how_many[:messages_per_user].times do
+				message = conversation.messages.create({body: "Sample message from seed", conversation_id: conversation.id})
+				message.user_id = user.id
+				message.save!
+
+				message = conversation.messages.create({body: "Sample message from seed", conversation_id: conversation.id})
+				message.user_id = requestee_id_num
+				message.save!
+			end
 		  end		
 		end
 		puts "Created immediate user friends.."		
