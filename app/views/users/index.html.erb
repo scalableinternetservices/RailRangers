@@ -31,15 +31,15 @@
                 <%= link_to user_path(user), class: "username",:style=> 'color:#4169E1;text-decoration: none;padding: 5px;' do %>
                 <%= user.firstname %>
               </div>
-              <% if current_user.requesters.where('requests.accepted = ?', false).include?(user) %>
+              <% if @requesters.where('requests.accepted = ?', false).include?(user) %>
                 <div class="confirm-btn">
-                <%= button_to "Confirm", request_path(id: current_user.received_requests.find_by(requester_id: user.id).id, request: { requester_id: user.id }), method: :put%>
+                <%= button_to "Confirm", request_path(id: @received_requests.find_by(requester_id: user.id).id, request: { requester_id: user.id }), method: :put%>
                 </div>
-              <% elsif current_user.requesters.where('requests.accepted = ?', true).include?(user) %>
+              <% elsif @requesters.where('requests.accepted = ?', true).include?(user) %>
                 <div class="send-msg-btn">
                     <%= button_to "Message", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %>
                 </div>
-              <% elsif !current_user.requestees.include?(user) %>
+              <% elsif !@requestees.include?(user) %>
                 <div class="add-friend-btn">
                 <%= button_to "Add Friend", requests_path(request: { requestee_id: user.id }), method: :post %> 
               </div>                 

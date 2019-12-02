@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="railrangersopt.mm2zgnvhgi.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
+    <server host="RailRangersPagination.mm2zgnvhgi.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
   </servers>
 
 
