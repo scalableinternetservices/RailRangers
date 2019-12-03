@@ -1,8 +1,7 @@
 <h4 class="comment-head">Conversation:</h4>
-
-<% if @conversation.messages.count > 0 %>
   <div class="all-conversations">
-    <% @conversation.messages.each do |message| %>
+    <% @messages.each do |message| %>
+      <% cache message do %>
       <p class="conversation">
         <span class="conversation-content">
         <strong><%= link_to "#{message.user.username}", class: "username" %></strong>
@@ -11,9 +10,9 @@
           <%= message.body %>
         </span>
       </p>
+      <% end %>
     <% end %>
   </div>
-<% end %>
 
 <h4 class="comment-head">New message:</h4>
 <%= form_for [@conversation, @conversation.messages.new] do |m| %>
