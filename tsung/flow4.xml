@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE tsung SYSTEM "/usr/local/share/tsung/tsung-1.0.dtd" [] >
+<tsung loglevel="notice">
+​
+  <!-- Client side setup -->
+  <clients>
+    <client host="localhost" use_controller_vm="true" maxusers='15000'/>
+  </clients>
+​
+  <!-- Server side setup -->
+  <servers>
+    <server host="railrangersopt.mm2zgnvhgi.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
+  </servers>
+​
+  <load>
+    <arrivalphase phase="1" duration="60" unit="second" >
+      <users arrivalrate="2" unit="second"/>
+    </arrivalphase>
+    <arrivalphase phase="2" duration="60" unit="second" >
+      <users arrivalrate="4" unit="second"/>
+    </arrivalphase>
+    <arrivalphase phase="3" duration="60" unit="second" >
+      <users arrivalrate="8" unit="second"/>
+    </arrivalphase>
+    <arrivalphase phase="4" duration="60" unit="second" >
+      <users arrivalrate="16" unit="second"/>
+    </arrivalphase>
+    <arrivalphase phase="5" duration="60" unit="second" >
+      <users arrivalrate="32" unit="second"/>
+    </arrivalphase>
+    <arrivalphase phase="6" duration="60" unit="second" >
+      <users arrivalrate="64" unit="second"/>
+    </arrivalphase>
+    <arrivalphase phase="7" duration="60" unit="second" >
+      <users arrivalrate="128" unit="second"/>
+    </arrivalphase>
+  </load>
+​
+  <options>
+    <!-- Set connection timeout to 2 seconds -->
+    <option name="global_ack_timeout" value="2000"></option>
+  </options>
+​
+  <sessions>
+    <session name="Messages" probability="100" type="ts_http">
+        <request>
+            <http url='/login' method="GET"></http>
+        </request>
+​
+        <setdynvars sourcetype="random_number" start="1" end="499">
+            <var name="rndint" />
+        </setdynvars>
+        
+        <request subst="true">
+            <http url="/login" method="POST" contents="username=user%%_rndint%%&amp;password=password&amp;commit=Login" content_type="application/x-www-form-urlencoded" />
+        </request> 
+​
+        <request subst="true">
+            <http url='/users/%%_rndint%%' method="GET"></http>
+        </request>
+​
+        <request subst="true">
+            <http url='/conversations/%%_rndint%%' method='GET'></http>
+        </request>
+        <!-- <request subst="true">
+            <http url='/conversations/%%_rndint%/messages' method='POST' contents="message%5Bbody%5D=hey&amp;message%5Bconversation_id%5D=%%_rndint%%&amp;message%5Buser_id%5D=%%_rndint%%" content_type="application/x-www-form-urlencoded"></http>
+        </request> -->
+    </session>
+  </sessions>
+</tsung>
+
+
+
+
+
+
+
+
+
+
+

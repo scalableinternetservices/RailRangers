@@ -43,7 +43,7 @@
   </options>
 
   <sessions>
-    <session name="View_Post_and_Comment" probability="50" type="ts_http">
+    <session name="View_Post_and_Comment" probability="30" type="ts_http">
       <request>
         <http url='/login' method="GET"></http>
       </request>
@@ -65,7 +65,7 @@
         <http url='/logout' method="GET"></http>
       </request>
     </session>
-    <session name="Post_and_Comment" probability="50" type="ts_http">
+    <session name="Post_and_Comment" probability="25" type="ts_http">
       <request>
         <http url='/login' method="GET"></http>
       </request>
@@ -97,13 +97,66 @@
         <request subst="true">
           <http url='/posts/%%_created_post_id%%' method='PUT' contents="post%5Bmessage%5D=Hello" content_type="application/x-www-form-urlencoded"></http>
         </request>
-        <!-- <request subst="true">
+        <request subst="true">
           <http url='/posts/%%_created_post_id%%' method='DELETE'></http>
-        </request> -->
+        </request>
         <request>
           <http url='/logout' method="GET"></http>
         </request>
       </transaction>
+    </session>
+        <session name="UsersandRequests" probability="15" type="ts_http">
+      <request>
+        <http url='/login' method="GET"></http>
+      </request>
+​
+      <setdynvars sourcetype="random_number" start="1" end="500">
+        <var name="rndint" />
+      </setdynvars>
+      
+      <request subst="true">
+        <http url="/login" method="POST" contents="username=user%%_rndint%%&amp;password=password&amp;commit=Login" content_type="application/x-www-form-urlencoded" />
+      </request> 
+      <request subst="true">
+        <http url='/users' method='GET'></http>
+      </request>
+​
+      <thinktime random="true" value="1"/> 
+      
+      <setdynvars sourcetype="random_number" start="1" end="500">
+        <var name="requestee_rndint" />
+      </setdynvars>
+​
+      <request subst="true">
+        <http url='/requests' method='POST' contents="request%5Brequestee_id%5D=%%_requestee_rndint%%"></http>
+      </request>
+      <request subst="true">
+        <http url='/requests' method='GET'></http>
+      </request>      
+    </session>
+        <session name="Messages" probability="30" type="ts_http">
+        <request>
+            <http url='/login' method="GET"></http>
+        </request>
+​
+        <setdynvars sourcetype="random_number" start="1" end="499">
+            <var name="rndint" />
+        </setdynvars>
+        
+        <request subst="true">
+            <http url="/login" method="POST" contents="username=user%%_rndint%%&amp;password=password&amp;commit=Login" content_type="application/x-www-form-urlencoded" />
+        </request> 
+​
+        <request subst="true">
+            <http url='/users/%%_rndint%%' method="GET"></http>
+        </request>
+​
+        <request subst="true">
+            <http url='/conversations/%%_rndint%%' method='GET'></http>
+        </request>
+        <request subst="true">
+            <http url='/conversations/%%_rndint%/messages' method='POST' contents="message%5Bbody%5D=hey&amp;message%5Bconversation_id%5D=%%_rndint%%&amp;message%5Buser_id%5D=%%_rndint%%" content_type="application/x-www-form-urlencoded"></http>
+        </request>
     </session>
   </sessions>
 </tsung>

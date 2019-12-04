@@ -28,9 +28,9 @@ class ConversationsController < ApplicationController
 
   def show
     @conversation = Conversation.find(params[:id])
-    # @messages = @conversation.messages.includes(:user).order("created_at DESC")
-    # @messages = @messages.paginate(:page => params[:page], :per_page => 30).reverse
-    @messages = Message.where('conversation_id != ?' , @conversation.id).paginate(:page => params[:page], :per_page => 30).order("created_at DESC").reverse
+    @messages = @conversation.messages.includes(:user).order("created_at DESC")
+    @messages = @messages.paginate(:page => params[:page], :per_page => 30).reverse
+    #@messages = Message.where('conversation_id != ?' , params[:id]).paginate(:page => params[:page], :per_page => 30).order("created_at DESC").reverse
     @receiver = interlocutor(@conversation)
     @message = Message.new
   end
