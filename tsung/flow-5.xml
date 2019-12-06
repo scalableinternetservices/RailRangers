@@ -46,9 +46,6 @@
         <request>
             <http url='/login' method="GET"></http>
         </request>
-        <request>
-          <http url='/posts' method="GET"></http>
-        </request>
 ​
         <setdynvars sourcetype="random_number" start="1" end="1000">
             <var name="rndint" />

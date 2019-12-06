@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
 	end
 
 	def seed_database
-		how_many = {user: 10000, posts_per_user: 0, friends_per_user: 0, messages_per_user: 0}
+		how_many = {user: 1000, posts_per_user: 3, friends_per_user: 10, messages_per_user: 20}
 		password = 'password'
 		# password_hash = User.digest(password)
 		
@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
 		# NOW_DT = DateTime.current
 		# NOW_STR = NOW_DT.strftime("%FT%T")
 		
-		user_ids = (1001..how_many[:user]).to_a
+		user_ids = (1..how_many[:user]).to_a
 		
 		user_ids.each do |i|
 			User.create!({ firstname: "user#{i}_first", lastname: "user#{i}_last", DOB: dob, username: "user#{i}", password: password })

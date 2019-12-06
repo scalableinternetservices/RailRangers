@@ -15,28 +15,28 @@
 
   <load>
     <arrivalphase phase="1" duration="60" unit="second">
-      <users arrivalrate="8" unit="second"></users>
+      <users arrivalrate="2" unit="second"></users>
     </arrivalphase>
     <arrivalphase phase="2" duration="60" unit="second">
-      <users arrivalrate="16" unit="second"></users>
+      <users arrivalrate="4" unit="second"></users>
     </arrivalphase>
     <arrivalphase phase="3" duration="60" unit="second">
-      <users arrivalrate="32" unit="second"></users>
+      <users arrivalrate="8" unit="second"></users>
     </arrivalphase>
     <arrivalphase phase="4" duration="60" unit="second">
-      <users arrivalrate="64" unit="second"></users>
+      <users arrivalrate="16" unit="second"></users>
     </arrivalphase>
     <arrivalphase phase="5" duration="60" unit="second">
-      <users arrivalrate="128" unit="second"></users>
+      <users arrivalrate="32" unit="second"></users>
     </arrivalphase>
     <arrivalphase phase="6" duration="60" unit="second">
-      <users arrivalrate="256" unit="second"></users>
+      <users arrivalrate="64" unit="second"></users>
     </arrivalphase>
     <arrivalphase phase="7" duration="60" unit="second">
-      <users arrivalrate="512" unit="second"></users>
+      <users arrivalrate="128" unit="second"></users>
     </arrivalphase>
     <arrivalphase phase="8" duration="60" unit="second">
-      <users arrivalrate="1024" unit="second"></users>
+      <users arrivalrate="256" unit="second"></users>
     </arrivalphase> 
   </load>
 
@@ -46,31 +46,30 @@
   </options>
 
   <sessions>
-    <session name="Signup" probability="10" type="ts_http">
-      <request>
-        <http url='/welcome' method="GET"></http>
-      </request>
-      <setdynvars sourcetype="random_number" start="501" end="100000">
-        <var name="rnd_user_id" />
-      </setdynvars>
-      <setdynvars sourcetype="random_number" start="10" end="28">
-        <var name="rnd_day" />
-      </setdynvars>
-      <setdynvars sourcetype="random_number" start="10" end="12">
-        <var name="rnd_month" />
-      </setdynvars>
-      <setdynvars sourcetype="random_number" start="2000" end="2019">
-        <var name="rnd_year" />
-      </setdynvars>    
-      <request subst="true">
-        <http url="/users" method="POST" contents="user%5Busername%5D=user%%_rnd_user_id%%&amp;user%5Bfirstname%5D=user%%_rnd_user_id%%&amp;user%5Blastname%5D=lname%%_rnd_user_id%%&amp;user%5BDOB%5D=%%_rnd_year%%-%%_rnd_month%%-%%_rnd_day%%&amp;user%5Bpassword%5D=user%%_rnd_user_id%%"/>
-      </request> 
-      <request>
-        <http url='/posts' method="GET"></http>
-      </request>
-      <request>
-        <http url='/logout' method="GET"></http>
-      </request>
+    <session name="Search" probability="15" type="ts_http">
+        <request>
+            <http url='/login' method="GET"></http>
+        </request>
+​
+        <setdynvars sourcetype="random_number" start="1" end="1000">
+            <var name="rndint" />
+        </setdynvars>
+        
+        <request subst="true">
+            <http url="/login" method="POST" contents="username=user%%_rndint%%&amp;password=password&amp;commit=Login" content_type="application/x-www-form-urlencoded" />
+        </request> 
+​
+        <setdynvars sourcetype="random_number" start="1" end="1000">
+            <var name="rndint_search" />
+        </setdynvars>
+​
+        <request subst="true">
+            <http url='/users?search=user%%_rndint_search%%' method="GET"></http>
+        </request>
+​
+        <request>
+         <http url='/logout' method="GET"></http>
+        </request>
     </session>
     <session name="View_Post_and_Comment" probability="30" type="ts_http">
       <request>
@@ -163,7 +162,7 @@
         <http url='/requests' method='GET'></http>
       </request>      
     </session>
-        <session name="Messages" probability="25" type="ts_http">
+        <session name="Messages" probability="20" type="ts_http">
         <request>
             <http url='/login' method="GET"></http>
         </request>
