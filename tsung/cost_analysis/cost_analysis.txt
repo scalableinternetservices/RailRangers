@@ -1,0 +1,3 @@
+Instance_type	DB_instance_type	Max #users/sec
+---------------------------------------------------
+m5.large			m5.large			8
