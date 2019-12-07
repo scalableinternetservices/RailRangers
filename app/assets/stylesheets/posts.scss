@@ -9,6 +9,9 @@
     left:0;
 
 }
+.logo {
+    padding: 10px;
+}
 .body-content {  
     position: absolute;
     width: 100%;
@@ -26,7 +29,7 @@
   top:0;
   left:0;
   z-index:100;
-  background-color: rgb(66,103,178);
+  background-color: rgb(00,36,60);
   width: 100%;
 }
 .page {
@@ -110,11 +113,11 @@
 .user-time-post {
     position: absolute;
     left: 10px;
-    color: rgb(238, 230, 230);
+    color: rgb(00,36,60);
 }
 
 .username {
-    color: royalblue;
+    color: rgb(00,36,60);
     font-size: 15px;
     font-weight: bold;
     margin-right: 5px;

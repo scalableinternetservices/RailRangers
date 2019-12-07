@@ -9,6 +9,16 @@
     left:0;
     bottom:0;
 }
+.welcome-header {
+	display: flex;
+	flex-direction: row;
+	padding: 50px;
+}
+.welcome-msg {
+	margin-left: 250px;
+	padding: 50px;
+	font-size: 20px;
+}
 .login-form {
 	display: flex;
 	flex-direction: row;

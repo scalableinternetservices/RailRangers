@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>App</title>
+    <title>GauchoBook</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true %>
 
   </head>
-
+  <%= favicon_link_tag asset_path('Icon_GB.png'), :rel => 'icon', :type =>  'image/png' %>
   <body>
     <%= yield %>
   </body>

@@ -37,7 +37,9 @@
 .first-name {
     padding-right: 5px;
 }
-
+.search-user {
+    padding: 10px;
+}
 .link-all-users {
   padding: 10px;
 }
@@ -88,6 +90,7 @@
 }
 .friends-header {
     padding-left: 10px;
+    color: rgb(00,36,60);
 }
 .user-posts {
     margin-top: 5px;
@@ -125,7 +128,7 @@
     left: 5px;
     top: 5px;
     text-decoration: none;
-    color: #4169E1;
+    color: rgb(00,36,60);
 }
 .confirm-btn {
     top: auto;

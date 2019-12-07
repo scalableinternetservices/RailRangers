@@ -1,19 +1,31 @@
 <div class="profile-page">
 	<div class="navbar">
+		<div class="logo">
+          <img src="/Icon_GB.png" alt="rss feed" />
+        </div>
         <div class="link-all-users">
-          <%= link_to 'All Users', users_path, :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+          <%= link_to 'All Users', users_path, :style=> 'color:#FFD700;text-decoration: none;padding: 5px;' %>
+        </div>
+        <div class="search-bar">
+              <%= form_tag '/users', :method => 'get' do %>
+               <div class="search-form">
+                 <div class="search-user">
+                   <%= text_field_tag :search, params[:search], placeholder: "Search..." %>                 
+                </div>
+              </div>
+            <%end%>       
         </div>
         <div class="link-home">
-          <%= link_to 'Home', posts_path, :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+          <%= link_to 'Home', posts_path, :style=> 'color:#FFD700;text-decoration: none;padding: 5px;' %>
         </div>
         <div class="link-profile">
-          <%= link_to "#{current_user.firstname}", user_path(current_user), :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+          <%= link_to "#{current_user.firstname}", user_path(current_user), :style=> 'color:#FFD700;text-decoration: none;padding: 5px;' %>
         </div>
         <div class="link-requests">
-          <%= link_to 'Friend Requests', requests_path, :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+          <%= link_to 'Friend Requests', requests_path, :style=> 'color:#FFD700;text-decoration: none;padding: 5px;' %>
         </div>
         <div class="link-signout">
-          <%= link_to 'Log out', logout_path, :style=> 'color:#FFFFFF;text-decoration: none;padding: 5px;' %>
+          <%= link_to 'Log out', logout_path, :style=> 'color:#FFD700;text-decoration: none;padding: 5px;' %>
         </div>
     </div>
  <div class="profile-posts">
@@ -65,7 +77,7 @@
 		    <div class="profile-post">
 		      <div class="post-header">
 		        <span class="user-time-post">
-		          <%= link_to "#{post.user.firstname}", post, class: "username" %>
+		          <%= link_to "#{post.user.firstname}", post,:style=> 'color:#003660;text-decoration: none;', class: "username"%>
 		          <%= link_to distance_of_time_in_words(Time.now, post.created_at)+ ' ago', post, class: 'timestamp' %>
 		        </span>
 		      
