@@ -1,4 +1,31 @@
 <h4 class="comment-head">Conversation:</h4>
+  <div class="navbar">
+
+        <div class="link-all-users">
+          <%= link_to 'All Users', users_path, :style=> 'color:#FFD700;text-decoration: none;padding: 5px;' %>
+        </div>
+        <div class="search-bar">
+              <%= form_tag '/users', :method => 'get' do %>
+               <div class="search-form">
+                 <div class="search-user">
+                   <%= text_field_tag :search, params[:search], placeholder: "Search..." %>                 
+                </div>
+              </div>
+            <%end%>       
+        </div>        
+        <div class="link-home">
+          <%= link_to 'Home', posts_path, :style=> 'color:#FFD700;text-decoration: none;padding: 5px;' %>
+        </div>
+        <div class="link-profile">
+          <%= link_to "#{current_user.firstname}", user_path(current_user), :style=> 'color:#FFD700;text-decoration: none;padding: 5px;' %>
+        </div>
+        <div class="link-requests">
+          <%= link_to 'Friend Requests', requests_path, :style=> 'color:#FFD700;text-decoration: none;padding: 5px;' %>
+        </div>
+        <div class="link-signout">
+          <%= link_to 'Log out', logout_path, :style=> 'color:#FFD700;text-decoration: none;padding: 5px;' %>
+        </div>
+    </div>
   <div class="all-conversations">
     <% @messages.each do |message| %>
       <% cache message do %>
